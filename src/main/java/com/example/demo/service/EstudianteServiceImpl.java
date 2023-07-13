@@ -24,4 +24,10 @@ public class EstudianteServiceImpl implements IEstudianteService{
 		this.estudianteRepo.create(estudiante);
 	}
 
+	@Override
+	public Estudiante buscarId(Integer id) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.read(id);
+	}
+
 }

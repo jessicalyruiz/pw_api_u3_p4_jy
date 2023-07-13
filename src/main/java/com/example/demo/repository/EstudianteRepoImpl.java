@@ -19,7 +19,7 @@ public class EstudianteRepoImpl  implements IEstudianteRepo{
 	@Override
 	public Estudiante buscarCedula(String cedula) {
 		// TODO Auto-generated method stub
-		TypedQuery<Estudiante> myQuery=this.entityManager.createQuery("Select e from Estudiante where c.cedula=:valor",Estudiante.class);
+		TypedQuery<Estudiante> myQuery=this.entityManager.createQuery("Select e from Estudiante e where e.cedula=:valor",Estudiante.class);
 		myQuery.setParameter("valor", cedula);
 		return null;
 	}
@@ -33,7 +33,19 @@ public class EstudianteRepoImpl  implements IEstudianteRepo{
 	@Override
 	public Estudiante read(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.entityManager.find(Estudiante.class, id);
+	}
+
+	@Override
+	public void update(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(estudiante);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		this.entityManager.remove(this.read(id));
 	}
 	
 

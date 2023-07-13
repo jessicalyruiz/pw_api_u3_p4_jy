@@ -23,7 +23,7 @@ public class EstudianteControllerRestFull {
 	
 	@GetMapping(path = "/buscar")
 	public Estudiante consultarCedula(String cedula) {
-		return this.estudianteService.buscarCedula("2300116");
+		return this.estudianteService.buscarCedula("23");
 		
 	}
 	

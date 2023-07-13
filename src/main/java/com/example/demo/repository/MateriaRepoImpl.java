@@ -3,6 +3,7 @@ package com.example.demo.repository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.repository.model.Estudiante;
+import com.example.demo.repository.model.Materia;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,35 +12,36 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public class EstudianteRepoImpl  implements IEstudianteRepo{
+public class MateriaRepoImpl  implements IMateriaRepo{
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
-	public Estudiante buscarCedula(String cedula) {
+	public Materia buscarCodigo(String codigo) {
 		// TODO Auto-generated method stub
-		TypedQuery<Estudiante> myQuery=this.entityManager.createQuery("Select e from Estudiante e where e.cedula=:valor",Estudiante.class);
-		myQuery.setParameter("valor", cedula);
+		TypedQuery<Materia> myQuery=this.entityManager.createQuery("Select m from Materia m where m.codigo=:valor",Materia.class);
+		myQuery.setParameter("valor", codigo);
 		return myQuery.getSingleResult();
 	}
 
 	@Override
-	public void create(Estudiante estudiante) {
+	public void create(Materia materia) {
 		// TODO Auto-generated method stub
-		this.entityManager.persist(estudiante);
+		this.entityManager.persist(materia);
 	}
 
 	@Override
-	public Estudiante read(Integer id) {
+	public Materia read(Integer id) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Estudiante.class, id);
-	}
+		return this.entityManager.find(Materia.class, id);
 
+	}
+	
 	@Override
-	public void update(Estudiante estudiante) {
+	public void update(Materia materia) {
 		// TODO Auto-generated method stub
-		this.entityManager.merge(estudiante);
+		this.entityManager.merge(materia);
 	}
 
 	@Override
@@ -47,6 +49,7 @@ public class EstudianteRepoImpl  implements IEstudianteRepo{
 		// TODO Auto-generated method stub
 		this.entityManager.remove(this.read(id));
 	}
+	
 	
 
 }

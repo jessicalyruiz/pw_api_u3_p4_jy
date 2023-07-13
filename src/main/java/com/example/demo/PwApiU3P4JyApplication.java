@@ -27,7 +27,7 @@ public class PwApiU3P4JyApplication implements CommandLineRunner {
 		Estudiante estu=new Estudiante();
 		estu.setApellido("yanez");
 		estu.setNombre("jessica");
-		estu.setCedula("2300116");
+		estu.setCedula("23");
 		estu.setFechaNacimiento(LocalDate.of(1992, 6, 24));
 		
 		//this.estudianteService.create(estu);

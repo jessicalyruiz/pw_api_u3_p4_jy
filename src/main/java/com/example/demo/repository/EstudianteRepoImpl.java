@@ -1,11 +1,14 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.repository.model.Estudiante;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -46,6 +49,29 @@ public class EstudianteRepoImpl  implements IEstudianteRepo{
 	public void delete(Integer id) {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(this.read(id));
+	}
+
+	@Override
+	public void partialUpdate(String cedulaActual, String cedulaNueva) {
+		// TODO Auto-generated method stub
+		Query myQuery=this.entityManager.createQuery("UPDATE Estudiante e SET e.cedula=:datoCedula WHERE e.cedula=:datoCondicion");
+		myQuery.setParameter("datoCedula", cedulaNueva);
+		myQuery.setParameter("datoCondicion", cedulaActual);
+		myQuery.executeUpdate();
+	}
+
+	@Override
+	public List<Estudiante> buscarTodos() {
+		TypedQuery<Estudiante> myQuery=this.entityManager.createQuery("Select e from Estudiante e", Estudiante.class);
+		
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarProvincia(String provincia) {
+TypedQuery<Estudiante> myQuery=this.entityManager.createQuery("Select e from Estudiante e where e.provincia=:valor", Estudiante.class);
+		myQuery.setParameter("valor", provincia);
+		return myQuery.getResultList();
 	}
 	
 

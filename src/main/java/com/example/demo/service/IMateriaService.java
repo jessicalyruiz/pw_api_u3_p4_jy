@@ -8,4 +8,6 @@ public interface IMateriaService {
 	public void create(Materia materia);
 	
 	public Materia buscarId(Integer id);
+	public void actualizar(Materia materia);
+	public void eliminar(Integer id);
 }

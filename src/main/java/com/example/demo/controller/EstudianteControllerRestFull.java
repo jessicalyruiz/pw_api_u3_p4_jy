@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,63 +23,89 @@ import com.example.demo.service.IEstudianteService;
 @RequestMapping(path = "/estudiantes")
 public class EstudianteControllerRestFull {
 
-	
-	@Autowired
-	IEstudianteService estudianteService;
-	
-	@GetMapping(path = "/buscar/{cedula}")
-	public Estudiante consultarCedula(@PathVariable String cedula) {
-		return this.estudianteService.buscarCedula(cedula);
-		
-	}
-	
-	@PostMapping(path = "/ingresar")
-	public void ingresarEstudiante(@RequestBody Estudiante estudiante) {
-		this.estudianteService.create(estudiante);
-	}
-	
-	@PutMapping(path = "/actualizar/{identif}")
-	public void actualizar(@RequestBody Estudiante estudiante, @PathVariable Integer identif) {
-		
-		estudiante.setId(identif);
-		//Estudiante estu=this.estudianteService.buscarId(identif);
-		this.estudianteService.update(estudiante);
-	}
-	
-	
-	
-	@PatchMapping(path = "/actualizarParcial")
-	public void actualizarParcial(@RequestBody Estudiante estudiante) {
-		Integer identif=11;
-		estudiante.setId(identif);
-		
-		
-		/*
-		///dos formas
-		String cedula="230011506";
-		Estudiante estu=this.estudianteService.buscarCedula(cedula);
-		estu.setCedula(estudiante.getCedula());
-		this.estudianteService.update(estudiante);	
-		*/
-		
-		///
-		this.estudianteService.partialUpdate("230011506", estudiante.getCedula());
-		
-	}
-	
-	@DeleteMapping(path = "/borrar/{id}")
-	public void borrar(@PathVariable Integer id) {
-		this.estudianteService.delete(id);
-		
-	}
-	
-	@GetMapping(path = "/buscar")
-	public List<Estudiante> buscarTodos(){
-		return this.estudianteService.buscarTodos();
-	}
-	
-	@GetMapping(path = "/buscarProvincia")
-	public List<Estudiante> buscarTodosProv(@RequestParam String provincia){
-		return this.estudianteService.buscarProvincia(provincia);
-	}
+	 
+
+	@Autowired 
+
+	IEstudianteService estudianteService; 
+
+	@GetMapping(path = "/{cedula}") 
+
+	public ResponseEntity<Estudiante> consultarCedula(@PathVariable String cedula) { 
+
+	return ResponseEntity.status(240).body(this.estudianteService.buscarCedula(cedula)); 
+
+	} 
+
+	@GetMapping 
+
+	public ResponseEntity<List<Estudiante>> buscarTodos(){ 
+		HttpHeaders cabeceras=new HttpHeaders();
+		cabeceras.add("detalle msj", "este es el msje , ciudadanos consultados con exito");
+		cabeceras.add("valor ", "infinito");
+	return new ResponseEntity<>(this.estudianteService.buscarTodos(),cabeceras, 228); 
+
+	} 
+
+	@PostMapping  //no hace falta el identificador.. solo sse inserta 1 registro 
+
+	public void ingresarEstudiante(@RequestBody Estudiante estudiante) { 
+
+	this.estudianteService.create(estudiante); 
+
+	} 
+
+	@PutMapping(path = "/{identif}") 
+
+	public void actualizar(@RequestBody Estudiante estudiante, @PathVariable Integer identif) { 
+
+	estudiante.setId(identif); 
+
+	//Estudiante estu=this.estudianteService.buscarId(identif); 
+
+	this.estudianteService.update(estudiante); 
+
+	} 
+
+	@PatchMapping(path = "/{identificador}") 
+
+	public void actualizarParcial(@RequestBody Estudiante estudiante, @PathVariable Integer identificador) { 
+
+	estudiante.setId(identificador); 
+
+	/* 
+
+	///dos formas 
+
+	String cedula="230011506"; 
+
+	Estudiante estu=this.estudianteService.buscarCedula(cedula); 
+
+	estu.setCedula(estudiante.getCedula()); 
+
+	this.estudianteService.update(estudiante);  
+
+	*/ 
+
+	/// 
+
+	this.estudianteService.partialUpdate("230011506", estudiante.getCedula()); 
+
+	} 
+
+	@DeleteMapping(path = "/{id}") 
+
+	public void borrar(@PathVariable Integer id) { 
+
+	this.estudianteService.delete(id); 
+
+	} 
+
+	@GetMapping(path = "/buscarProvincia") 
+
+	public List<Estudiante> buscarTodosProv(@RequestParam String provincia){ 
+
+	return this.estudianteService.buscarProvincia(provincia); 
+
+	} 
 }

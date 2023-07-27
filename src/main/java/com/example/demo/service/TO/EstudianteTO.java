@@ -1,7 +1,10 @@
-package com.example.demo.repository.model;
+package com.example.demo.service.TO;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.hateoas.RepresentationModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,33 +16,27 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 
-@Entity
-@Table(name = "estudiante")
-public class Estudiante {
 
-	@Id
-    @Column(name ="estu_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estu_id_seq")
-    @SequenceGenerator(name = "estu_id_seq", sequenceName = "estu_id_seq", allocationSize = 1)
+public class EstudianteTO extends RepresentationModel<EstudianteTO> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 	
-	@Column(name = "estu_nombre")
 	private String nombre;
 	
-	@Column(name = "estu_apellido")
 	private String apellido;
 	
-	@Column(name = "estu_cedula")
 	private String cedula;
 	
-	@Column(name = "estu_provincia")
 	private String provincia;
 	
-	@Column(name = "estu_fecha_nacimiento")
 	private LocalDate fechaNacimiento;
 	
-	@OneToMany()
-	private List<Materia> materias;
+	//private List<Materia> materias;
 
 	public Integer getId() {
 		return id;

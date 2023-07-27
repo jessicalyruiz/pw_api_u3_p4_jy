@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.repository.model.Estudiante;
+import com.example.demo.service.TO.EstudianteTO;
 
 public interface IEstudianteService {
 
@@ -18,4 +19,6 @@ public interface IEstudianteService {
 	public List<Estudiante> buscarTodos();
 	
 	public List<Estudiante> buscarProvincia(String provincia);
+	
+	public List<EstudianteTO> buscarTodosTO();
 }

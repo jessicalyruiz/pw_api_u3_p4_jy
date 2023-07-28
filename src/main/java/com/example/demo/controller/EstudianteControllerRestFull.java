@@ -36,8 +36,8 @@ public class EstudianteControllerRestFull {
 	@Autowired
 
 	IEstudianteService estudianteService;
-	
-	@Autowired 
+
+	@Autowired
 	IMateriaService materiaService;
 
 	// @GetMapping(path = "/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -60,24 +60,32 @@ public class EstudianteControllerRestFull {
 	}
 
 	// ********************************* HATEOAS
-	@GetMapping (path = "/hateoas",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<EstudianteTO>> buscarTodosHateoas(){ 
-		
-		//EstudianteTO est=null;
-		
-		List<EstudianteTO>lista= this.estudianteService.buscarTodosTO();
+	@GetMapping(path = "/hateoas", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<EstudianteTO>> buscarTodosHateoas() {
+
+		// EstudianteTO est=null;
+
+		List<EstudianteTO> lista = this.estudianteService.buscarTodosTO();
 		for (EstudianteTO estudianteTO : lista) {
-			Link myLink=linkTo(methodOn(EstudianteControllerRestFull.class).buscarPorEstudiante(estudianteTO.getCedula())).withRel("materias");
+			Link myLink = linkTo(
+					methodOn(EstudianteControllerRestFull.class).buscarPorEstudiante(estudianteTO.getCedula()))
+					.withRel("materias");
 			estudianteTO.add(myLink);
 		}
-		
-		
-		
-		return new ResponseEntity<>(lista, null,200);	}
 
-	@GetMapping(path = "/{cedula}/materias",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<MateriaTO>>  buscarPorEstudiante(@PathVariable String cedula){
-		return new ResponseEntity<>(this.materiaService.buscarPorCedula(cedula),null,200);
+		return new ResponseEntity<>(lista, null, 200);
+	}
+
+	@GetMapping(path = "/{cedula}/materias", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MateriaTO>> buscarPorEstudiante(@PathVariable String cedula) {
+		
+		List<MateriaTO> lista=this.materiaService.buscarPorCedula(cedula);
+		for (MateriaTO materiaTO : lista) {
+			Link myLink=linkTo(methodOn(MateriaControllerRestFull.class).buscarId(materiaTO.getId())).withRel("materia");
+			materiaTO.add(myLink);
+		}
+		
+		return new ResponseEntity<>(lista, null, 200);
 	}
 
 	@PostMapping(consumes = "application/json") // no hace falta el identificador.. solo sse inserta 1 registro

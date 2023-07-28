@@ -38,7 +38,7 @@ public class Estudiante {
 	@Column(name = "estu_fecha_nacimiento")
 	private LocalDate fechaNacimiento;
 	
-	@OneToMany()
+	@OneToMany(mappedBy ="estudiante" )
 	private List<Materia> materias;
 
 	public Integer getId() {
@@ -87,6 +87,14 @@ public class Estudiante {
 
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
+	}
+
+	public List<Materia> getMaterias() {
+		return materias;
+	}
+
+	public void setMaterias(List<Materia> materias) {
+		this.materias = materias;
 	}
 	
 	

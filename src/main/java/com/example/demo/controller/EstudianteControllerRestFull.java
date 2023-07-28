@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.repository.model.Estudiante;
 import com.example.demo.service.IEstudianteService;
+import com.example.demo.service.IMateriaService;
 import com.example.demo.service.TO.EstudianteTO;
 import com.example.demo.service.TO.MateriaTO;
 
@@ -35,6 +36,9 @@ public class EstudianteControllerRestFull {
 	@Autowired
 
 	IEstudianteService estudianteService;
+	
+	@Autowired 
+	IMateriaService materiaService;
 
 	// @GetMapping(path = "/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@GetMapping(path = "/{cedula}", produces = "application/xml")
@@ -56,10 +60,10 @@ public class EstudianteControllerRestFull {
 	}
 
 	// ********************************* HATEOAS
-	@GetMapping (path = "/hateoas")
+	@GetMapping (path = "/hateoas",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<EstudianteTO>> buscarTodosHateoas(){ 
 		
-		EstudianteTO est=null;
+		//EstudianteTO est=null;
 		
 		List<EstudianteTO>lista= this.estudianteService.buscarTodosTO();
 		for (EstudianteTO estudianteTO : lista) {
@@ -71,9 +75,9 @@ public class EstudianteControllerRestFull {
 		
 		return new ResponseEntity<>(lista, null,200);	}
 
-	@GetMapping(path = "/{cedula}/materias")
-	public ResponseEntity<List<MateriaTO>> buscarPorEstudiante(@PathVariable String cedula){
-		return null;
+	@GetMapping(path = "/{cedula}/materias",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MateriaTO>>  buscarPorEstudiante(@PathVariable String cedula){
+		return new ResponseEntity<>(this.materiaService.buscarPorCedula(cedula),null,200);
 	}
 
 	@PostMapping(consumes = "application/json") // no hace falta el identificador.. solo sse inserta 1 registro

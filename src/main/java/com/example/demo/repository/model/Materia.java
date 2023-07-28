@@ -1,10 +1,13 @@
 package com.example.demo.repository.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -33,6 +36,11 @@ public class Materia {
 	
 	@Column(name = "mate_semestre")
 	private Integer semestre;
+	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "mate_id_estudiante")
+	private Estudiante estudiante;
 
 	public Integer getId() {
 		return id;
@@ -80,6 +88,14 @@ public class Materia {
 
 	public void setSemestre(Integer semestre) {
 		this.semestre = semestre;
+	}
+
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 	
 	

@@ -14,8 +14,7 @@ import com.example.demo.service.IEstudianteService;
 public class PwApiU3P4JyApplication implements CommandLineRunner {
 
 	
-	@Autowired
-	IEstudianteService estudianteService;
+
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PwApiU3P4JyApplication.class, args);

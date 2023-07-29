@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -31,6 +32,7 @@ import com.example.demo.service.TO.MateriaTO;
 
 @RestController
 @RequestMapping(path = "/estudiantes")
+@CrossOrigin
 public class EstudianteControllerRestFull {
 
 	@Autowired
@@ -49,8 +51,7 @@ public class EstudianteControllerRestFull {
 
 	}
 
-	@GetMapping
-
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Estudiante>> buscarTodos() {
 		HttpHeaders cabeceras = new HttpHeaders();
 		cabeceras.add("detalle msj", "este es el msje , ciudadanos consultados con exito");

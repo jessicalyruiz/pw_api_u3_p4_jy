@@ -43,8 +43,8 @@ public class EstudianteControllerRestFull {
 	IMateriaService materiaService;
 
 	// @GetMapping(path = "/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@GetMapping(path = "/{cedula}", produces = "application/xml")
-	@ResponseStatus(code = HttpStatus.CONFLICT) // estos prefereible usar en los 300
+	@GetMapping(path = "/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE)
+	//@ResponseStatus(code = HttpStatus.CONFLICT) // estos prefereible usar en los 300
 	public Estudiante consultarCedula(@PathVariable String cedula) {
 
 		return this.estudianteService.buscarCedula(cedula);
@@ -156,9 +156,10 @@ public class EstudianteControllerRestFull {
 
 	@DeleteMapping(path = "/{id}")
 
-	public void borrar(@PathVariable Integer id) {
-
+	public Estudiante borrar(@PathVariable Integer id) {
+		Estudiante estu=	this.estudianteService.buscarId(id);
 		this.estudianteService.delete(id);
+		return estu;
 
 	}
 

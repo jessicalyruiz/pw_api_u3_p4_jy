@@ -2,18 +2,8 @@ package com.example.demo.service.TO;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.hateoas.RepresentationModel;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
 
 
 

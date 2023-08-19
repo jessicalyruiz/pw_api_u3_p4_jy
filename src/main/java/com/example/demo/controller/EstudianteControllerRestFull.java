@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,6 +25,7 @@ import com.example.demo.service.IEstudianteService;
 
 @RestController
 @RequestMapping(path = "/estudiantes")
+@CrossOrigin
 public class EstudianteControllerRestFull {
 
 	 
@@ -34,7 +36,7 @@ public class EstudianteControllerRestFull {
 
 	//@GetMapping(path = "/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE) 
 	@GetMapping(path = "/{cedula}", produces = "application/xml")
-	@ResponseStatus(code = HttpStatus.CONFLICT) //estos prefereible usar en los 300
+	//@ResponseStatus(code = HttpStatus.CONFLICT) //estos prefereible usar en los 300
 	public Estudiante consultarCedula(@PathVariable String cedula) { 
 
 	return this.estudianteService.buscarCedula(cedula);

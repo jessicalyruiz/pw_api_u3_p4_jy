@@ -24,7 +24,7 @@ public class HorarioRepoImpl  implements IHorarioRepo{
 		// TODO Auto-generated method stub
 		TypedQuery<Horario> myQuery=this.entityManager.createQuery("Select e from Horario e where e.codigo=:valor",Horario.class);
 		myQuery.setParameter("valor", codigo);
-		return myQuery.getSingleResult();
+		return myQuery.getSingleResult(); 
 	}
 
 	@Override
@@ -54,10 +54,10 @@ public class HorarioRepoImpl  implements IHorarioRepo{
 	@Override
 	public void partialUpdate(String codigoActual, String codigoNueva) {
 		// TODO Auto-generated method stub
-		Query myQuery=this.entityManager.createQuery("UPDATE Horario e SET e.codigo=:datoCodigo WHERE e.codigo=:datoCondicion");
+		/*Query myQuery=this.entityManager.createQuery("UPDATE Horario e SET e.codigo=:datoCodigo WHERE e.codigo=:datoCondicion");
 		myQuery.setParameter("datoCodigo", codigoNueva);
 		myQuery.setParameter("datoCondicion", codigoActual);
-		myQuery.executeUpdate();
+		myQuery.executeUpdate();*/
 	}
 
 	@Override

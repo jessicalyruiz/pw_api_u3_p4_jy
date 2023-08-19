@@ -25,7 +25,7 @@ public class AuthEntryPointJWT implements AuthenticationEntryPoint {
 		
 		LOG.error(request.getServletPath());
 		
-		
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 
 }

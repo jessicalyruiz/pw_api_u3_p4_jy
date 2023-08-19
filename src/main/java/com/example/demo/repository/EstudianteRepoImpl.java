@@ -54,10 +54,11 @@ public class EstudianteRepoImpl  implements IEstudianteRepo{
 	@Override
 	public void partialUpdate(String cedulaActual, String cedulaNueva) {
 		// TODO Auto-generated method stub
+		/*
 		Query myQuery=this.entityManager.createQuery("UPDATE Estudiante e SET e.cedula=:datoCedula WHERE e.cedula=:datoCondicion");
 		myQuery.setParameter("datoCedula", cedulaNueva);
 		myQuery.setParameter("datoCondicion", cedulaActual);
-		myQuery.executeUpdate();
+		myQuery.executeUpdate();*/
 	}
 
 	@Override

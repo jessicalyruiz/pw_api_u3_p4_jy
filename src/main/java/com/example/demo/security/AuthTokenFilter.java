@@ -37,11 +37,11 @@ public class AuthTokenFilter extends OncePerRequestFilter{
 			//como es valido el token, lo authentico
 			String nombre= this.jwtUtils.getUsrNameFromJwtToken(jwt);
 			//////////////// atuenticacion
-			UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(nombre, new ArrayList<>());
+			UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(nombre, null, new ArrayList<>());
 			
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(authentication); //seteo la authenticacion en la session
-			
+			LOG.info("************unername  "+nombre);
 		}
 		}catch (Exception e) {
 			// TODO: handle exception
